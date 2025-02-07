@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Photo Gallery - DivineCare Cosmetics</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body onload="initializeGallery()">
+    <a href="#main-content" class="skip-link">Skip to Main Content</a>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div id="main-content">
+        <h1>Welcome to DivineCare Cosmetics</h1>
+        <p>Explore our premium skincare collection.</p>
+
+        <div class="gallery-container">
+            <div class="large-image" id="large-image-container">
+                <img id="large-image" src="images (2).jpeg" alt="Hover over an image to see details">
+                <p id="large-image-text">Hover over an image to see details</p>
+            </div>
+            <div class="gallery">
+                <figure><img src="cien men invisible.jpeg" alt="Cien Men Invisible - Lightweight and effective deodorant"></figure>
+                <figure><img src="sanex_dermo_sensitive.jpeg" alt="Sanex Dermo Sensitive - Gentle on sensitive skin"></figure>
+                <figure><img src="cien men show gel.jpeg" alt="Cien Men Shower Gel - Refreshing and invigorating"></figure>
+                <figure><img src="cien_men_body_sprays.jpeg" alt="Cien Men Body Spray - Long-lasting freshness"></figure>
+                <figure><img src="nivea men.jpeg" alt="Nivea Men - Hydrating and nourishing"></figure>
+                <figure><img src="sanex_ph_balance.jpeg" alt="Sanex PH Balance - Maintains skin's natural balance"></figure>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function initializeGallery() {
+            const images = document.querySelectorAll(".gallery img");
+            const largeImage = document.getElementById("large-image");
+            const largeImageText = document.getElementById("large-image-text");
+            const originalText = "Hover over an image to see details";
+            const originalImage = "placeholder.jpg";
+
+            // Add tabindex dynamically
+            images.forEach((img, index) => {
+                img.setAttribute("tabindex", "0");
+                console.log(`Tabindex added to image: ${img.alt}`);
+            });
+
+            // Add event listeners
+            images.forEach((img) => {
+                img.addEventListener("mouseover", updateImage);
+                img.addEventListener("mouseleave", resetImage);
+                img.addEventListener("focus", updateImage);
+                img.addEventListener("blur", resetImage);
+            });
+
+            function updateImage(event) {
+                largeImage.src = event.target.src;
+                largeImageText.textContent = event.target.alt;
+                console.log("Image updated:", event.target.alt);
+            }
+
+            function resetImage() {
+                largeImage.src = originalImage;
+                largeImageText.textContent = originalText;
+                console.log("Image reset to original");
+            }
+        }
+    </script>
+</body>
+</html>
